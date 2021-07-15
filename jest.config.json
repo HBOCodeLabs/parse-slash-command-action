@@ -1,0 +1,6 @@
+{
+    "collectCoverage": true,
+    "coverageReporters": ["text", "json", "lcov", "cobertura"],
+    "coverageDirectory": "temp/coverage",
+    "restoreMocks": true
+}
