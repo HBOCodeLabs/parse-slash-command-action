@@ -1,0 +1,20 @@
+name: 'Slash Command Parser'
+description: 'Building block that parses a slash command and return a custom result'
+inputs:
+  repo-token:
+    description: 'token to use for repo access (typically GITHUB_TOKEN)'
+    required: true
+  configuration-path:
+    description: 'file path to your configuration YAML file'
+    required: false
+    default: '.github/slash-command.yaml'
+outputs:
+  message:
+    description: 'a message to add to the triggering comment'
+  reaction:
+    description: 'an emoji name to add as a reaction'
+  result:
+    description: 'a JSON blob representing a custom result'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
