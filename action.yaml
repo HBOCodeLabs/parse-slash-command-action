@@ -3,11 +3,16 @@ description: 'Building block that parses a slash command and return a custom res
 inputs:
   repo-token:
     description: 'token to use for repo access (typically GITHUB_TOKEN)'
-    required: true
-  configuration-path:
-    description: 'file path to your configuration YAML file'
     required: false
-    default: '.github/slash-command.yaml'
+    default: ${{ github.token }}
+  configuration-path:
+    description: 'load configuration YAML from the specified path'
+    required: false
+    default: '.github/slash-commands.yaml'
+  configuration-ref:
+    description: 'load configuration YAML from the specified ref'
+    required: false
+    default: ${{ github.context.sha }}
 outputs:
   message:
     description: 'a message to add to the triggering comment'

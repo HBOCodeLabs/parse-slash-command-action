@@ -1,6 +1,6 @@
 {
   "name": "parse-slash-command-action",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Parse a slash command left in a PR comment.",
   "main": "lib/index.js",
   "private": true,

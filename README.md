@@ -44,7 +44,8 @@ Note that the user-defined properties do not have any meaning on their own -- it
 Input Name    | Required? | Description
 ----------    | --------- | -----------
 `configuration-path` | No | path to your configuration YAML file (usually `.github/slash-commands.yaml`)
-`repo-token`  | Yes       | the API token to use for access (usually GITHUB_TOKEN)
+`configuration-ref`  | No | commit ref to use when loading configuration file (usually `$GITHUB_SHA`)
+`repo-token`  | No        | the API token to use for access (usually `$GITHUB_TOKEN`)
 
 ## Outputs
 
@@ -52,13 +53,19 @@ Output Name  | Description
 -----------  | -----------
 `message`    | message to add to the user's comment
 `reaction`   | reaction emoji to add to the PR comment
-`result`     | the result body if a command matched, or `{}` if not
+`result`     | JSON-formatted result body if a command matched, or `{}` if not
 
 ## Changelog
 
 Note: for the versions listed below, your workflows can refer to either the version tag (`HBOCodeLabs/parse-slash-command-action@v1.0.5`) or the major version branch (`HBOCodeLabs/parse-slash-command-action@v1`).
 
 The major version branch may be updated with backwards-compatible features and bug fixes. Version tags will not be modified once released.
+
+#### 2021-08-02 - `v1.1.0` (`v1`)
+
+ - The `repo-token` input is now optional, and defaults to `$GITHUB_TOKEN`.
+ - The commit ref to use when loading your configuration file can now be overriden.
+ - Improved error message for incomplete commands.
 
 #### 2021-07-11 - `v1.0.0` (`v1`)
 
