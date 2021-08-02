@@ -34,12 +34,16 @@ const action = {
         let commands = config.commands;
         let consumed = [];
         let result;
+        let incorrectCommand = false;
 
         for (let arg of args) {
             consumed.push(arg);
 
             let command = commands.find(command => command.name === arg);
-            if (!command) break;
+            if (!command) {
+                incorrectCommand = true;
+                break;
+            }
 
             if (command.result) {
                 result = command.result;
@@ -50,8 +54,6 @@ const action = {
             }
         }
 
-        core.info(result);
-
         if (result) {
             core.info(`Success: ${JSON.stringify(result)}`);
             core.setOutput('result', JSON.stringify(result));
@@ -59,8 +61,15 @@ const action = {
         } else {
             let failed = consumed.join(' ');
             let options = commands.map(command => command.name).join(', ');
+            let prefix = 'Unknown command';
             let suggest = consumed.slice(0, -1).concat(`[${options}]`).join(' ');
-            let error = `> Unknown command \`${failed}\` - try one of \`${suggest}\``;
+
+            if (!incorrectCommand) {
+                prefix = 'Incomplete command';
+                suggest = consumed.concat(`[${options}]`).join(' ');
+            }
+
+            let error = `> ${prefix} \`${failed}\` - try one of \`${suggest}\``;
             core.info(`Failed: ${error}`);
             core.setOutput('result', '{}');
             core.setOutput('message', error);
