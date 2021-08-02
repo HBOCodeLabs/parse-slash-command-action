@@ -7,7 +7,7 @@ inputs:
   configuration-path:
     description: 'file path to your configuration YAML file'
     required: false
-    default: '.github/slash-command.yaml'
+    default: '.github/slash-commands.yaml'
 outputs:
   message:
     description: 'a message to add to the triggering comment'

@@ -14,7 +14,7 @@ const YAML = __nccwpck_require__(1917);
 const action = {
     async main() {
         const token = core.getInput('repo-token', { required: true });
-        const configPath = core.getInput('configuration-path') || '.github/slash-commands.yaml'
+        const configPath = core.getInput('configuration-path');
 
         const octokit = github.getOctokit(token);
         const config = await action.getConfig(octokit, configPath);
