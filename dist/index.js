@@ -16,6 +16,8 @@ const action = {
         const token = core.getInput('repo-token', { required: true });
         const configPath = core.getInput('configuration-path');
 
+console.log(github.context);
+
         const octokit = github.getOctokit(token);
         const config = await action.getConfig(octokit, configPath);
         const comment = github.context.payload.comment.body;
