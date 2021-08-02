@@ -13,13 +13,12 @@ const YAML = __nccwpck_require__(1917);
 
 const action = {
     async main() {
-        const token = core.getInput('repo-token', { required: true });
+        const token = core.getInput('repo-token');
         const configPath = core.getInput('configuration-path');
-
-console.log(github.context);
+        const configRef = core.getInput('configuration-ref');
 
         const octokit = github.getOctokit(token);
-        const config = await action.getConfig(octokit, configPath);
+        const config = await action.getConfig(octokit, configPath, configRef);
         const comment = github.context.payload.comment.body;
         const args = String(comment).trim().split(/ +/);
 
@@ -68,12 +67,12 @@ console.log(github.context);
             core.setOutput('reaction', 'confused');
         }
     },
-    async getConfig(octokit, configPath) {
+    async getConfig(octokit, configPath, configRef) {
         let params = {
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             path: configPath,
-            ref: github.context.sha
+            ref: configRef
         };
         core.info(`Retrieve: ${JSON.stringify(params)}`);
 
@@ -81,7 +80,7 @@ console.log(github.context);
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             path: configPath,
-            ref: github.context.sha
+            ref: configRef
         });
         const text = Buffer.from(response.data.content, response.data.encoding).toString();
 
