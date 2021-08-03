@@ -8,7 +8,7 @@ steps:
     displayName: 'git config email'
   - script: 'git config --local user.name hbo-github-bot'
     displayName: 'git config name'
-  - script: 'npm install'
+  - script: 'npm ci'
     displayName: 'Install: parse-slash-command-action'
   - script: 'npm test'
     displayName: 'Test: parse-slash-command-action'
