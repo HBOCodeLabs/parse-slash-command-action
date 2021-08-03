@@ -8,8 +8,8 @@ const fs = require('fs');
 
 function verifyCleanWorkspace() {
     const output = execSync(`git status --porcelain`, { encoding: 'utf8' });
-    if (output != '') {
-        console.log('ERROR: Working copy should not contain any uncommitted or untracked files.');
+    if (output !== '') {
+        console.log(`ERROR: Working copy should not contain any uncommitted or untracked files:\n${output}`);
         process.exit(2);
     }
 }
