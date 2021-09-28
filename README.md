@@ -39,6 +39,21 @@ Each command can define a nested `commands` property (for longer subcommands). L
 
 Note that the user-defined properties do not have any meaning on their own -- it's up to your workflow to take some action, if appropriate, based on the results from this action.
 
+## Configuration File Format
+
+The configuration file is a YAML file containing an array of `commands`. Each command
+should contain either a `result` property, or a nested `commands` array. Commands can
+be nested multiple levels deep.
+
+Property | Required? | Description
+-------- | --------- | -----------
+name     | Yes       | the name of this command or subcommand
+aliases  | No        | a list of optional aliases that can be used instead of the name
+result   | No<sup>1</sup> | the user-specified value or object to return for this command
+commands | No<sup>1</sup> | if specified, a new list of subcommands that can come after this command
+
+<sup>1</sup> Either `result` or `commands` is required.
+
 ## Inputs
 
 Input Name    | Required? | Description
@@ -60,6 +75,11 @@ Output Name  | Description
 Note: for the versions listed below, your workflows can refer to either the version tag (`HBOCodeLabs/parse-slash-command-action@v1.0.5`) or the major version branch (`HBOCodeLabs/parse-slash-command-action@v1`).
 
 The major version branch may be updated with backwards-compatible features and bug fixes. Version tags will not be modified once released.
+
+#### 2021-09-24 - `v1.2.0` (`v1`)
+
+ - Added support for `aliases` property in command configuration.
+ - Added validation for configuration file.
 
 #### 2021-08-02 - `v1.1.0` (`v1`)
 
